@@ -42,7 +42,7 @@
       if (e.key === 'Enter') {
         const query = input.value.trim();
         if (query) {
-          chrome.tabs.create({ url: buildSearchUrl(query) });
+          window.open(buildSearchUrl(query), '_blank');
           closeOverlay();
           input.value = '';
         }
