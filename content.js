@@ -3,6 +3,10 @@
   let shadowRoot = null;
   let isOpen = false;
 
+  function buildSearchUrl(query) {
+    return 'https://www.perplexity.ai/search?q=' + encodeURIComponent(query.trim());
+  }
+
   function buildOverlayHTML() {
     return `
       <div id="backdrop">
@@ -31,6 +35,18 @@
     shadowRoot.appendChild(style);
     shadowRoot.appendChild(template.content.cloneNode(true));
     document.body.appendChild(host);
+
+    const input = shadowRoot.getElementById('input');
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const query = input.value.trim();
+        if (query) {
+          chrome.tabs.create({ url: buildSearchUrl(query) });
+          closeOverlay();
+          input.value = '';
+        }
+      }
+    });
   }
 
   function openOverlay() {
