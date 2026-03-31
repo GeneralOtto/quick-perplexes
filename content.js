@@ -54,6 +54,13 @@
         closeOverlay();
       }
     });
+
+    shadowRoot.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        input.focus();
+      }
+    });
   }
 
   function openOverlay() {
