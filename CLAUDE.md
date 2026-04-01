@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A Chrome Manifest V3 extension that adds a Spotlight-like overlay (triggered by `Ctrl+``) to any webpage, letting users submit queries directly to Perplexity.ai. Zero dependencies, no build step.
+A Chrome and Firefox Manifest V3 extension that adds a Spotlight-like overlay (triggered by `Ctrl+``) to any webpage, letting users submit queries directly to Perplexity.ai. Zero dependencies, no build step.
 
 ## Development Workflow
 
@@ -19,10 +19,12 @@ A Chrome Manifest V3 extension that adds a Spotlight-like overlay (triggered by 
 node scale-icons.js
 ```
 
-**Package for Chrome Web Store:**
+**Package for Chrome and Firefox:**
 ```bash
-powershell -Command "Compress-Archive -Force -Path manifest.json, background.js, content.js, overlay.css, icons -DestinationPath quick-perplexes-1.0.zip"
+node build.js
 ```
+
+Outputs `dist/quick-perplexes-chrome-{version}.zip` and `dist/quick-perplexes-firefox-{version}.zip`.
 
 See `docs/publishing.md` for the full Chrome Web Store submission walkthrough.
 
