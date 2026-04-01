@@ -112,6 +112,7 @@ function collectEntries() {
   const iconDir = path.join(__dirname, 'icons');
   const iconFiles = fs.readdirSync(iconDir)
     .filter(f => f.endsWith('.png'))
+    .sort()
     .map(f => `icons/${f}`);
 
   const entries = [];
