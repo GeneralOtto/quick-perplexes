@@ -75,6 +75,7 @@
         const input = shadowRoot.getElementById('input');
         if (prefill) {
           input.value = prefill;
+          input.focus();
           input.select();
         }
         input.focus();
@@ -84,6 +85,7 @@
       const input = shadowRoot.getElementById('input');
       if (prefill) {
         input.value = prefill;
+        input.focus();
         input.select();
       }
       input.focus();
