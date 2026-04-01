@@ -65,18 +65,28 @@
     });
   }
 
-  function openOverlay() {
+  function openOverlay(prefill = '') {
     if (isCreating) return;
     isOpen = true;
     if (!host) {
       isCreating = true;
       createOverlay().then(() => {
         isCreating = false;
-        shadowRoot.getElementById('input').focus();
+        const input = shadowRoot.getElementById('input');
+        if (prefill) {
+          input.value = prefill;
+          input.select();
+        }
+        input.focus();
       });
     } else {
       host.style.display = '';
-      shadowRoot.getElementById('input').focus();
+      const input = shadowRoot.getElementById('input');
+      if (prefill) {
+        input.value = prefill;
+        input.select();
+      }
+      input.focus();
     }
   }
 
