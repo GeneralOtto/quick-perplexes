@@ -90,7 +90,7 @@
   }
 
   document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.key === '`') {
+    if (e.ctrlKey && e.code === 'Backquote') {
       e.preventDefault();
       e.stopPropagation();
       if (isOpen) {
