@@ -8,20 +8,6 @@
     return 'https://www.perplexity.ai/search?q=' + encodeURIComponent(query.trim());
   }
 
-  function buildOverlayHTML() {
-    return `
-      <div id="backdrop">
-        <div id="card">
-          <input id="input" type="text" placeholder="Search Perplexity…" autocomplete="off" spellcheck="false" />
-          <div id="footer">
-            <span>Opens in Perplexity</span>
-            <span>Esc to close</span>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
   async function createOverlay() {
     host = document.createElement('div');
     shadowRoot = host.attachShadow({ mode: 'closed' });
@@ -30,14 +16,33 @@
     const style = document.createElement('style');
     style.textContent = styleText;
 
-    const template = document.createElement('template');
-    template.innerHTML = buildOverlayHTML();
+    const input = document.createElement('input');
+    input.id = 'input';
+    input.type = 'text';
+    input.placeholder = 'Search Perplexity…';
+    input.autocomplete = 'off';
+    input.spellcheck = false;
+
+    const footer = document.createElement('div');
+    footer.id = 'footer';
+    const hint1 = document.createElement('span');
+    hint1.textContent = 'Opens in Perplexity';
+    const hint2 = document.createElement('span');
+    hint2.textContent = 'Esc to close';
+    footer.append(hint1, hint2);
+
+    const card = document.createElement('div');
+    card.id = 'card';
+    card.append(input, footer);
+
+    const backdrop = document.createElement('div');
+    backdrop.id = 'backdrop';
+    backdrop.append(card);
 
     shadowRoot.appendChild(style);
-    shadowRoot.appendChild(template.content.cloneNode(true));
+    shadowRoot.appendChild(backdrop);
     document.body.appendChild(host);
 
-    const input = shadowRoot.getElementById('input');
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         const query = input.value.trim();
@@ -49,7 +54,6 @@
       }
     });
 
-    const backdrop = shadowRoot.getElementById('backdrop');
     backdrop.addEventListener('click', (e) => {
       if (e.target === backdrop) {
         closeOverlay();

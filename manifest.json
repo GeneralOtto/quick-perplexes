@@ -40,7 +40,8 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "quick-perplexes@otto",
-      "strict_min_version": "121.0"
+      "strict_min_version": "121.0",
+      "data_collection_permissions": "none"
     }
   },
   "web_accessible_resources": [
