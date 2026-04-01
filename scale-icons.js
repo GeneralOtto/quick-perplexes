@@ -204,15 +204,48 @@ function encodePNG(pixels, w, h) {
   return Buffer.concat([sig, chunk('IHDR', ihdr), chunk('IDAT', zlib.deflateSync(raw, {level:9})), chunk('IEND', Buffer.alloc(0))]);
 }
 
-// ── Main ─────────────────────────────────────────────────────────────────────
-const src = decodePNG(fs.readFileSync(path.join(__dirname, 'icons/suggestion.png')));
-console.log(`Source: ${src.width}×${src.height}`);
+// ── Rounded corners mask (anti-aliased) ──────────────────────────────────────
+function applyRoundedCorners(pixels, w, h, radiusFraction = 0.225) {
+  const r = radiusFraction * Math.min(w, h);
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      // distance from pixel centre to nearest corner arc centre
+      const cx = x < r ? r : x > w - 1 - r ? w - 1 - r : x;
+      const cy = y < r ? r : y > h - 1 - r ? h - 1 - r : y;
+      const dx = x - cx, dy = y - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      // smooth step over 1 px for anti-aliasing
+      const alpha = 1 - Math.max(0, Math.min(1, dist - r + 1));
+      const i = (y * w + x) * 4;
+      pixels[i + 3] *= alpha;
+    }
+  }
+  return pixels;
+}
 
-for (const size of [16, 32, 48, 128]) {
-  const scaled = resize(src.pixels, src.width, src.height, size, size);
-  const png = encodePNG(scaled, size, size);
-  const out = path.join(__dirname, `icons/icon${size}.png`);
-  fs.writeFileSync(out, png);
-  console.log(`✓ icons/icon${size}.png`);
+// ── Main ─────────────────────────────────────────────────────────────────────
+const suggestionPath = path.join(__dirname, 'icons/suggestion.png');
+const hasSuggestion = fs.existsSync(suggestionPath);
+
+if (hasSuggestion) {
+  const src = decodePNG(fs.readFileSync(suggestionPath));
+  console.log(`Source: ${src.width}×${src.height}`);
+  for (const size of [16, 32, 48, 128]) {
+    const scaled = resize(src.pixels, src.width, src.height, size, size);
+    applyRoundedCorners(scaled, size, size);
+    const png = encodePNG(scaled, size, size);
+    const out = path.join(__dirname, `icons/icon${size}.png`);
+    fs.writeFileSync(out, png);
+    console.log(`✓ icons/icon${size}.png`);
+  }
+} else {
+  console.log('icons/suggestion.png not found — applying rounded corners to existing icons');
+  for (const size of [16, 32, 48, 128]) {
+    const p = path.join(__dirname, `icons/icon${size}.png`);
+    const { width, height, pixels } = decodePNG(fs.readFileSync(p));
+    applyRoundedCorners(pixels, width, height);
+    fs.writeFileSync(p, encodePNG(pixels, width, height));
+    console.log(`✓ icons/icon${size}.png`);
+  }
 }
 console.log('\nDone.');
