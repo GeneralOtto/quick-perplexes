@@ -1,0 +1,247 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0d1117;
+  color: #c9d1d9;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.5;
+}
+
+/* ── Layout ── */
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+section {
+  padding: 56px 32px;
+  border-bottom: 1px solid #21262d;
+  text-align: center;
+}
+
+section:last-of-type {
+  border-bottom: none;
+}
+
+/* ── Hero ── */
+.hero-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  box-shadow: 0 0 32px rgba(88, 166, 255, 0.25);
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-name {
+  font-size: 42px;
+  font-weight: 800;
+  color: #f0f6fc;
+  letter-spacing: -1.5px;
+  margin-bottom: 10px;
+}
+
+.hero-tagline {
+  font-size: 17px;
+  color: #8b949e;
+  margin-bottom: 8px;
+}
+
+.hero-usage {
+  font-size: 15px;
+  color: #8b949e;
+  margin-bottom: 28px;
+}
+
+kbd {
+  background: #21262d;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-size: 13px;
+  color: #c9d1d9;
+  font-family: inherit;
+}
+
+/* ── Buttons ── */
+.btn-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: #238636;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #21262d;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  font-weight: 500;
+}
+
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: default;
+}
+
+@media (max-width: 420px) {
+  .btn-row {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ── Demo section ── */
+.section-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #8b949e;
+  margin-bottom: 20px;
+}
+
+.demo-wrapper {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 32px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 300px;
+  transition: opacity 0.3s ease;
+}
+
+.demo-input {
+  background: #1c2128;
+  border: 1px solid #444c56;
+  border-radius: 8px;
+  padding: 12px 18px;
+  width: 280px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.demo-icon {
+  color: #8b949e;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.demo-text {
+  color: #c9d1d9;
+  font-size: 14px;
+  font-style: italic;
+  flex: 1;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  background: #58a6ff;
+  vertical-align: middle;
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ── How it works ── */
+.steps {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  max-width: 480px;
+  margin: 0 auto 24px;
+}
+
+.step {
+  flex: 1;
+}
+
+.step-emoji {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f0f6fc;
+  margin-bottom: 4px;
+}
+
+.step-desc {
+  font-size: 12px;
+  color: #8b949e;
+}
+
+.tip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #8b949e;
+}
+
+.tip strong {
+  color: #c9d1d9;
+}
+
+/* ── Install CTA ── */
+.cta-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #f0f6fc;
+  margin-bottom: 8px;
+}
+
+.cta-sub {
+  font-size: 14px;
+  color: #8b949e;
+  margin-bottom: 20px;
+}
+
+/* ── Footer ── */
+footer {
+  padding: 24px 32px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  font-size: 12px;
+  color: #8b949e;
+}
+
+footer a {
+  color: #8b949e;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #58a6ff;
+  text-decoration: underline;
+}
