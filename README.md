@@ -1,20 +1,46 @@
 # Quick Perplexes
 
-A Chrome extension that summons a Spotlight-like search overlay with `Ctrl+\`` on any webpage. Type a query, hit Enter — Perplexity opens in a new tab.
+A Chrome and Firefox extension that summons a Spotlight-like search overlay with `Ctrl+`` on any webpage. Type a query, hit Enter — Perplexity opens in a new tab.
+
+## Install
+
+- **Chrome:** [Chrome Web Store](#) *(coming soon)*
+- **Firefox:** [Firefox Add-ons](#) *(coming soon)*
+
+Or load unpacked for development (see below).
 
 ## Usage
 
-1. Load the extension in Chrome via `chrome://extensions` → **Load unpacked**
-2. Press `Ctrl+\`` on any webpage to open the search overlay
-3. Type your query and hit `Enter` — Perplexity opens in a new tab
-4. Press `Esc` or click the backdrop to dismiss
+1. Press `Ctrl+`` on any webpage to open the search overlay
+2. Type your query and hit `Enter` — Perplexity opens in a new tab
+3. Press `Esc` or click outside to dismiss
 
-Clicking the extension icon in the toolbar also opens perplexity.ai directly.
+Clicking the toolbar icon also opens perplexity.ai directly.
 
 ## Development
 
-No build step. Edit the source files and reload the extension in `chrome://extensions`.
+**Chrome:** Go to `chrome://extensions` → **Load unpacked** → select the repo root
 
----
+**Firefox:** Go to `about:debugging` → **This Firefox** → **Load Temporary Add-on** → select `manifest.json`
 
-Design doc: [Obsidian vault] 11_Designs/Quick Perplexes — Design Document.md
+Edit source files, then reload the extension to pick up changes.
+
+**Run tests:** Open `tests/test.html` in a browser — tests run automatically.
+
+**Package for submission:**
+```bash
+node build.js
+```
+Outputs `dist/quick-perplexes-chrome-{version}.zip` and `dist/quick-perplexes-firefox-{version}.zip`.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `manifest.json` | Extension manifest (Chrome + Firefox) |
+| `background.js` | Service worker — opens perplexity.ai on toolbar click |
+| `content.js` | Injects the search overlay into every page |
+| `overlay.css` | Styles for the overlay (loaded at runtime via Shadow DOM) |
+| `build.js` | Packages the extension into ZIPs for store submission |
+| `scale-icons.js` | Generates icon sizes from `icons/suggestion.png` |
+| `tests/test.html` | Unit tests for `buildSearchUrl()` |

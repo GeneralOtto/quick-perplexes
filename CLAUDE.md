@@ -26,8 +26,6 @@ node build.js
 
 Outputs `dist/quick-perplexes-chrome-{version}.zip` and `dist/quick-perplexes-firefox-{version}.zip`.
 
-See `docs/publishing.md` for the full Chrome Web Store submission walkthrough.
-
 ## Architecture
 
 The extension has two scripts:
