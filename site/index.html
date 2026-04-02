@@ -9,76 +9,110 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="page">
 
-  <!-- Hero -->
-  <section class="hero">
-    <img class="hero-icon" src="icon128.png" alt="Quick Perplexes icon" />
-    <h1 class="hero-name">Quick Perplexes</h1>
-    <p class="hero-tagline">Instant Perplexity. Zero context switching.</p>
-    <p class="hero-usage">Press <kbd>Ctrl+`</kbd> on any page &mdash; type &mdash; hit Enter.</p>
-    <div class="btn-row">
-      <!-- TODO: replace with <a href="[Chrome Web Store URL]"> once live -->
-      <button class="btn btn-primary" disabled>Add to Chrome</button>
-      <a href="https://addons.mozilla.org/en-US/firefox/addon/quick-perplexes/" class="btn btn-secondary">Add to Firefox</a>
+<!-- Star field -->
+<div id="stars"></div>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <img src="icon128.png" alt="" />
+      Quick Perplexes
+    </a>
+    <div class="nav-links">
+      <a class="nav-link active" href="index.html">Home</a>
+      <a class="nav-link" href="docs.html">Docs</a>
     </div>
-  </section>
+  </div>
+</nav>
 
-  <!-- Demo -->
-  <section class="demo">
-    <p class="section-label">See it in action</p>
-    <div class="demo-wrapper" id="demo-wrapper">
-      <div class="demo-input">
-        <span class="demo-icon">&#128269;</span>
-        <span class="demo-text" id="demo-text"></span><span class="cursor" id="demo-cursor"></span>
-      </div>
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-glow"></div>
+
+  <img class="hero-icon" src="icon128.png" alt="Quick Perplexes icon" />
+
+  <h1 class="hero-title">
+    Instant Perplexity<br>
+    <span class="gradient-text">on any page</span>
+  </h1>
+
+  <p class="hero-sub">
+    The Spotlight experience for the web. Press <kbd>Ctrl+`</kbd>, type your
+    question, hit <kbd>Enter</kbd> — you never leave the page you're on.
+  </p>
+
+  <div id="demo-wrapper">
+    <span class="demo-dot"></span>
+    <span id="demo-text"></span>
+    <span class="cursor" id="demo-cursor"></span>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" disabled>Add to Chrome</button>
+    <a href="https://addons.mozilla.org/en-US/firefox/addon/quick-perplexes/"
+       class="btn btn-secondary" target="_blank" rel="noopener">Add to Firefox</a>
+  </div>
+
+  <p class="version-badge">v1.0.1 &mdash; MIT License</p>
+</section>
+
+<!-- ── How it works ── -->
+<section class="features">
+  <p class="section-label">How it works</p>
+  <h2 class="features-heading">Three keystrokes to an answer</h2>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">⌨️</div>
+      <h3>Press <kbd>Ctrl+`</kbd></h3>
+      <p>Summons the overlay on any webpage — instantly, without reloading or switching tabs.</p>
     </div>
-  </section>
-
-  <!-- How it works -->
-  <section class="how">
-    <p class="section-label">How it works</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-emoji">&#9000;&#65039;</div>
-        <div class="step-title">Press Ctrl+`</div>
-        <div class="step-desc">On any webpage</div>
-      </div>
-      <div class="step">
-        <div class="step-emoji">&#9999;&#65039;</div>
-        <div class="step-title">Type your query</div>
-        <div class="step-desc">Hit Enter</div>
-      </div>
-      <div class="step">
-        <div class="step-emoji">&#128270;</div>
-        <div class="step-title">Perplexity opens</div>
-        <div class="step-desc">In a new tab</div>
-      </div>
+    <div class="feature-card">
+      <div class="feature-icon">✏️</div>
+      <h3>Type your query</h3>
+      <p>Or select text on the page first — it pre-fills the search box automatically.</p>
     </div>
-    <div class="tip">
-      <span>&#128161;</span>
-      <span><strong>Tip:</strong> Select text on the page first &mdash; it&rsquo;ll pre-fill the search box.</span>
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <h3>Get answers</h3>
+      <p>Hit <kbd>Enter</kbd> and Perplexity opens your search in a new tab, fully loaded.</p>
     </div>
-  </section>
+  </div>
 
-  <!-- Install CTA -->
-  <section class="install">
-    <p class="cta-title">Check it out!</p>
-    <div class="btn-row">
-      <!-- TODO: replace with <a href="[Chrome Web Store URL]"> once live -->
-      <button class="btn btn-primary" disabled>Add to Chrome</button>
-      <a href="https://addons.mozilla.org/en-US/firefox/addon/quick-perplexes/" class="btn btn-secondary">Add to Firefox</a>
+  <div style="text-align:center">
+    <div class="tip-box">
+      <span>💡</span>
+      <span><strong>Tip:</strong> Highlight any text before pressing <kbd>Ctrl+`</kbd> &mdash; it lands straight in the search box.</span>
     </div>
-  </section>
+  </div>
+</section>
 
-</div>
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <h2>Try it <span class="gradient-text">free</span></h2>
+  <p>No account. No permissions beyond the active tab. Works on Chrome and Firefox.</p>
+  <div class="btn-row">
+    <button class="btn btn-primary" disabled>Add to Chrome</button>
+    <a href="https://addons.mozilla.org/en-US/firefox/addon/quick-perplexes/"
+       class="btn btn-secondary" target="_blank" rel="noopener">Add to Firefox</a>
+  </div>
+  <a href="docs.html" style="font-size:13px;color:var(--text-muted);text-decoration:none;display:block;margin-top:12px;transition:color .2s"
+     onmouseover="this.style.color='var(--accent-light)'"
+     onmouseout="this.style.color='var(--text-muted)'">
+    Read the docs &rarr;
+  </a>
+</section>
 
-<!-- Footer (outside .page so it spans full width at 600px) -->
+<!-- ── Footer ── -->
 <footer>
   <span>MIT License</span>
-  <a href="https://github.com/ottomando/quick-perplexes">View source on GitHub &rarr;</a>
+  <a href="https://github.com/ottomando/quick-perplexes" target="_blank" rel="noopener">View source on GitHub &rarr;</a>
+  <a href="docs.html">Docs</a>
 </footer>
 
+<script src="stars.js"></script>
 <script src="demo.js"></script>
 </body>
 </html>

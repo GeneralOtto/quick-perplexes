@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs — Quick Perplexes</title>
+  <meta name="description" content="Full documentation for Quick Perplexes: installation, usage, keyboard shortcuts, architecture, and version history." />
+  <link rel="icon" href="icon128.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Star field -->
+<div id="stars"></div>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <img src="icon128.png" alt="" />
+      Quick Perplexes
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link active" href="docs.html">Docs</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Docs layout ── -->
+<div class="docs-layout">
+
+  <!-- Sidebar -->
+  <aside class="docs-sidebar" id="sidebar">
+    <div class="docs-sidebar-section">
+      <div class="docs-sidebar-label">Getting started</div>
+      <a href="#overview"      class="active">Overview</a>
+      <a href="#installation">Installation</a>
+      <a href="#usage">        Usage guide</a>
+    </div>
+    <div class="docs-sidebar-section">
+      <div class="docs-sidebar-label">Reference</div>
+      <a href="#keyboard">Keyboard shortcuts</a>
+      <a href="#architecture">Architecture</a>
+    </div>
+    <div class="docs-sidebar-section">
+      <div class="docs-sidebar-label">Project</div>
+      <a href="#changelog">Version history</a>
+      <a href="#contributing">Contributing</a>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <main class="docs-content" id="docs-content">
+
+    <h1 class="gradient-text">Documentation</h1>
+    <p class="docs-lead">
+      Everything you need to install, use, and understand Quick Perplexes — a
+      lightweight browser extension that brings a Spotlight-style overlay to
+      every webpage, routing your searches directly to Perplexity.ai.
+    </p>
+
+    <!-- ── Overview ── -->
+    <div class="docs-section" id="overview">
+      <h2><span class="section-icon">📖</span> Overview</h2>
+      <p>
+        Quick Perplexes adds a persistent keyboard shortcut (<kbd>Ctrl+`</kbd>) to
+        every webpage you visit. Pressing it opens a floating search overlay — built
+        inside a closed Shadow DOM so it never conflicts with the host page's styles or
+        scripts. Type a query, press <kbd>Enter</kbd>, and Perplexity.ai opens in a new
+        tab with your search already running.
+      </p>
+      <p>
+        The extension has no backend, collects no data, and requires only the
+        <code style="font-family:monospace;font-size:13px;color:var(--accent-light)">tabs</code>
+        permission (to open the new tab). It is free and open-source under the MIT
+        license.
+      </p>
+      <div class="callout">
+        <span class="callout-icon">✨</span>
+        <span>
+          <strong>Text selection pre-fill:</strong> highlight any text on a page before
+          pressing <kbd>Ctrl+`</kbd> and the overlay opens with that text already in the
+          search box — ideal for quickly looking up something you just read.
+        </span>
+      </div>
+    </div>
+
+    <!-- ── Installation ── -->
+    <div class="docs-section" id="installation">
+      <h2><span class="section-icon">📦</span> Installation</h2>
+
+      <h3>Firefox</h3>
+      <div class="install-steps">
+        <div class="install-step">
+          <div class="install-step-num">1</div>
+          <div class="install-step-body">
+            Visit the
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/quick-perplexes/"
+               target="_blank" rel="noopener">Firefox Add-ons listing</a>
+            for Quick Perplexes.
+          </div>
+        </div>
+        <div class="install-step">
+          <div class="install-step-num">2</div>
+          <div class="install-step-body">
+            Click <strong>Add to Firefox</strong> and confirm the permission prompt.
+          </div>
+        </div>
+        <div class="install-step">
+          <div class="install-step-num">3</div>
+          <div class="install-step-body">
+            The extension activates immediately on all tabs — no restart needed. Press
+            <kbd>Ctrl+`</kbd> on any page to confirm it's working.
+          </div>
+        </div>
+      </div>
+
+      <h3>Chrome (manual load)</h3>
+      <p>The Chrome Web Store listing is pending review. In the meantime you can load the extension manually from source.</p>
+      <div class="install-steps">
+        <div class="install-step">
+          <div class="install-step-num">1</div>
+          <div class="install-step-body">
+            <a href="https://github.com/ottomando/quick-perplexes" target="_blank" rel="noopener">
+              Download or clone the repository
+            </a> and note the folder path.
+          </div>
+        </div>
+        <div class="install-step">
+          <div class="install-step-num">2</div>
+          <div class="install-step-body">
+            Open <strong>chrome://extensions</strong> in Chrome and enable
+            <strong>Developer mode</strong> (top-right toggle).
+          </div>
+        </div>
+        <div class="install-step">
+          <div class="install-step-num">3</div>
+          <div class="install-step-body">
+            Click <strong>Load unpacked</strong> and select the repository root folder
+            (the one containing <code style="font-family:monospace;font-size:12px">manifest.json</code>).
+          </div>
+        </div>
+        <div class="install-step">
+          <div class="install-step-num">4</div>
+          <div class="install-step-body">
+            The extension appears in your toolbar. Press <kbd>Ctrl+`</kbd> on any page
+            to test it.
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <span class="callout-icon">🔄</span>
+        <span>
+          <strong>After updating source files:</strong> go back to
+          <strong>chrome://extensions</strong> and click the refresh icon on the
+          Quick Perplexes card to reload the extension.
+        </span>
+      </div>
+    </div>
+
+    <!-- ── Usage ── -->
+    <div class="docs-section" id="usage">
+      <h2><span class="section-icon">🖱️</span> Usage guide</h2>
+
+      <h3>Opening the overlay</h3>
+      <p>
+        Press <kbd>Ctrl+`</kbd> (backtick, the key above <kbd>Tab</kbd>) on any webpage.
+        The overlay appears centred on screen, the input is focused, and the host page's
+        own keyboard shortcuts are suspended until you close it.
+      </p>
+      <p>
+        On <strong>macOS</strong> the same shortcut works — the extension uses
+        <code style="font-family:monospace;font-size:12px;color:var(--accent-light)">e.code</code>
+        rather than <code style="font-family:monospace;font-size:12px;color:var(--accent-light)">e.key</code>
+        to handle keyboard layout differences reliably.
+      </p>
+
+      <h3>Submitting a search</h3>
+      <p>
+        Type your query and press <kbd>Enter</kbd>. Quick Perplexes constructs a
+        Perplexity.ai search URL and opens it in a new tab. The overlay closes
+        automatically and the input is cleared for the next use.
+      </p>
+
+      <h3>Pre-filling with selected text</h3>
+      <p>
+        Select any text on the page before pressing <kbd>Ctrl+`</kbd>. The overlay opens
+        with that text already in the input, ready to submit or edit. The selection
+        is highlighted so you can immediately start typing to replace it.
+      </p>
+
+      <h3>Closing the overlay</h3>
+      <p>You can close the overlay without searching in three ways:</p>
+      <ul>
+        <li>Press <kbd>Esc</kbd></li>
+        <li>Click anywhere outside the overlay (backdrop click)</li>
+        <li>Press <kbd>Ctrl+`</kbd> again to toggle it closed</li>
+      </ul>
+
+      <h3>Toolbar icon</h3>
+      <p>
+        Clicking the Quick Perplexes icon in the browser toolbar opens
+        <a href="https://perplexity.ai" target="_blank" rel="noopener"
+           style="color:var(--accent-light);text-decoration:none">perplexity.ai</a>
+        directly in a new tab — a quick shortcut when you want the full interface
+        rather than the overlay.
+      </p>
+    </div>
+
+    <!-- ── Keyboard reference ── -->
+    <div class="docs-section" id="keyboard">
+      <h2><span class="section-icon">⌨️</span> Keyboard shortcuts</h2>
+      <table class="key-table">
+        <thead>
+          <tr><th>Shortcut</th><th>Action</th><th>Context</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><kbd>Ctrl+`</kbd></td>
+            <td>Open / close overlay</td>
+            <td>Any webpage</td>
+          </tr>
+          <tr>
+            <td><kbd>Enter</kbd></td>
+            <td>Submit search query</td>
+            <td>Overlay open</td>
+          </tr>
+          <tr>
+            <td><kbd>Esc</kbd></td>
+            <td>Close overlay without searching</td>
+            <td>Overlay open</td>
+          </tr>
+          <tr>
+            <td><kbd>Tab</kbd> / <kbd>Shift+Tab</kbd></td>
+            <td>Focus stays inside overlay</td>
+            <td>Overlay open</td>
+          </tr>
+          <tr>
+            <td>Backdrop click</td>
+            <td>Close overlay without searching</td>
+            <td>Overlay open</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top:20px">
+        <span class="callout-icon">🔒</span>
+        <span>
+          While the overlay is open, <strong>all keydown events are intercepted</strong>
+          at the capture phase — preventing host-page shortcuts (e.g. video player
+          shortcuts, editor bindings) from firing accidentally.
+        </span>
+      </div>
+    </div>
+
+    <!-- ── Architecture ── -->
+    <div class="docs-section" id="architecture">
+      <h2><span class="section-icon">🏗️</span> Architecture</h2>
+      <p>
+        Quick Perplexes is a Manifest V3 extension with exactly two scripts. There are
+        no build steps, no npm packages, and no bundler — the source is what ships.
+      </p>
+
+      <div class="arch-grid">
+        <div class="arch-card">
+          <h4>background.js</h4>
+          <p>Service worker. Single responsibility: listens for toolbar icon clicks and opens perplexity.ai in a new tab via <code style="font-size:12px">chrome.tabs.create</code>.</p>
+        </div>
+        <div class="arch-card">
+          <h4>content.js</h4>
+          <p>Injected into every page at <code style="font-size:12px">document_start</code>. Manages the full overlay lifecycle: creation, toggle, query submission, focus trapping, and cleanup.</p>
+        </div>
+        <div class="arch-card">
+          <h4>overlay.css</h4>
+          <p>Stylesheet loaded at runtime via <code style="font-size:12px">fetch(chrome.runtime.getURL())</code> and injected as a <code style="font-size:12px">&lt;style&gt;</code> tag inside the Shadow DOM.</p>
+        </div>
+        <div class="arch-card">
+          <h4>manifest.json</h4>
+          <p>MV3 manifest. Declares the <code style="font-size:12px">tabs</code> permission, the content script, the service worker, and <code style="font-size:12px">overlay.css</code> as a web-accessible resource.</p>
+        </div>
+      </div>
+
+      <h3>Shadow DOM isolation</h3>
+      <p>
+        The overlay is attached to a host element as a <strong>closed Shadow DOM</strong>.
+        This means the overlay's CSS is completely isolated from the host page — no
+        style leaks in either direction, regardless of what CSS frameworks or resets
+        the page uses. The host element itself is a plain <code style="font-family:monospace;font-size:12px;color:var(--accent-light)">&lt;div&gt;</code>
+        appended to <code style="font-family:monospace;font-size:12px;color:var(--accent-light)">document.body</code>.
+      </p>
+
+      <h3>Overlay lifecycle</h3>
+      <div class="code-block"><span class="comment">// First trigger — create once, reuse forever</span>
+<span class="kw">if</span> (!host) {
+  host = document.createElement(<span class="str">'div'</span>);
+  shadowRoot = host.attachShadow({ mode: <span class="str">'closed'</span> });
+  <span class="comment">// fetch CSS → inject &lt;style&gt; → build DOM → attach listeners</span>
+  document.body.appendChild(host);
+}
+
+<span class="comment">// Subsequent triggers — just toggle display</span>
+overlay.style.display = isOpen ? <span class="str">'none'</span> : <span class="str">'flex'</span>;
+isOpen = !isOpen;</div>
+
+      <h3>Keyboard event capture</h3>
+      <p>
+        The <kbd>Ctrl+`</kbd> listener is registered in the <strong>capture phase</strong>
+        (<code style="font-family:monospace;font-size:12px;color:var(--accent-light)">useCapture: true</code>),
+        so it fires before any host-page handlers. While the overlay is open,
+        <code style="font-family:monospace;font-size:12px;color:var(--accent-light)">stopPropagation()</code>
+        is called on all <code style="font-family:monospace;font-size:12px;color:var(--accent-light)">keydown</code>
+        events to prevent host-page shortcuts from firing.
+      </p>
+
+      <h3>URL construction</h3>
+      <p>
+        The <code style="font-family:monospace;font-size:12px;color:var(--accent-light)">buildSearchUrl(query)</code>
+        function (the only logic with unit tests) encodes the query and appends it to the
+        Perplexity search endpoint. Tests live in <code style="font-family:monospace;font-size:12px">tests/test.html</code>
+        and run automatically when opened in a browser.
+      </p>
+
+      <h3>Cross-browser compatibility</h3>
+      <p>
+        Firefox support was added in v0.5.0. The manifest includes a
+        <code style="font-family:monospace;font-size:12px;color:var(--accent-light)">browser_specific_settings.gecko</code>
+        block with the extension ID and minimum Firefox version (140+). The
+        <code style="font-family:monospace;font-size:12px">build.js</code> script packages
+        the same source into separate Chrome and Firefox zips using a pure-Node ZIP writer
+        with no external dependencies.
+      </p>
+    </div>
+
+    <!-- ── Changelog ── -->
+    <div class="docs-section" id="changelog">
+      <h2><span class="section-icon">📋</span> Version history</h2>
+
+      <div class="changelog-entry">
+        <div class="changelog-header">
+          <span class="changelog-tag">v1.0.1</span>
+          <span class="changelog-date">2026-04-02</span>
+        </div>
+        <div class="changelog-desc">
+          <strong>Bug fix:</strong> Host-page keyboard shortcuts (e.g. video player controls, editor bindings) are now properly blocked while the overlay is open. Firefox Add-ons store listing goes live.
+        </div>
+      </div>
+
+      <div class="changelog-entry">
+        <div class="changelog-header">
+          <span class="changelog-tag">v1.0.0</span>
+          <span class="changelog-date">2026-04-01</span>
+        </div>
+        <div class="changelog-desc">
+          <strong>Public launch.</strong> Marketing website deployed to GitHub Pages. GitHub Actions workflow automates site deployment on every push to main.
+        </div>
+      </div>
+
+      <div class="changelog-entry">
+        <div class="changelog-header">
+          <span class="changelog-tag">v0.5.0</span>
+          <span class="changelog-date">2026-04-01</span>
+        </div>
+        <div class="changelog-desc">
+          <strong>Firefox support.</strong> Manifest updated with gecko block, extension ID, and <code style="font-family:monospace;font-size:12px">data_collection_permissions</code>. <code style="font-family:monospace;font-size:12px">build.js</code> added — pure-Node script that packages separate Chrome and Firefox zips with deterministic timestamps. Extension icons updated with rounded corners.
+        </div>
+      </div>
+
+      <div class="changelog-entry">
+        <div class="changelog-header">
+          <span class="changelog-tag">v0.4.0</span>
+          <span class="changelog-date">2026-04-01</span>
+        </div>
+        <div class="changelog-desc">
+          <strong>Text selection pre-fill.</strong> Pressing <kbd>Ctrl+`</kbd> while text is selected on the page pre-fills the overlay input with that text. Selection is highlighted and focused so the user can submit or edit immediately.
+        </div>
+      </div>
+
+      <div class="changelog-entry">
+        <div class="changelog-header">
+          <span class="changelog-tag">v0.3.0</span>
+          <span class="changelog-date">2026-04-01</span>
+        </div>
+        <div class="changelog-desc">
+          <strong>Custom icons + macOS fix.</strong> User-designed extension icons replace generated placeholders. Shortcut detection switched from <code style="font-family:monospace;font-size:12px">e.key</code> to <code style="font-family:monospace;font-size:12px">e.code</code> to handle macOS keyboard layout differences. Keydown propagation from the Shadow DOM stopped to prevent host-page shortcut interference.
+        </div>
+      </div>
+
+      <div class="changelog-entry">
+        <div class="changelog-header">
+          <span class="changelog-tag">v0.2.1</span>
+          <span class="changelog-date">2026-03-31</span>
+        </div>
+        <div class="changelog-desc">
+          <strong>Bug fixes.</strong> Raced overlay creation guarded with <code style="font-family:monospace;font-size:12px">isCreating</code> flag. Input cleared on close. <code style="font-family:monospace;font-size:12px">Esc</code> propagation stopped. Switched to <code style="font-family:monospace;font-size:12px">window.open()</code> (content scripts cannot call <code style="font-family:monospace;font-size:12px">chrome.tabs.create</code>). Unit tests added for URL builder.
+        </div>
+      </div>
+
+      <div class="changelog-entry">
+        <div class="changelog-header">
+          <span class="changelog-tag">v0.2.0</span>
+          <span class="changelog-date">2026-03-31</span>
+        </div>
+        <div class="changelog-desc">
+          <strong>Core overlay.</strong> Shadow DOM overlay with <kbd>Ctrl+`</kbd> toggle, query submission on <kbd>Enter</kbd>, dismiss on <kbd>Esc</kbd> or backdrop click, and focus trapping inside the overlay while open.
+        </div>
+      </div>
+
+      <div class="changelog-entry">
+        <div class="changelog-header">
+          <span class="changelog-tag">v0.1.0</span>
+          <span class="changelog-date">2026-03-31</span>
+        </div>
+        <div class="changelog-desc">
+          <strong>Initial release.</strong> MV3 manifest scaffolded. Background service worker opens perplexity.ai when the toolbar icon is clicked.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Contributing ── -->
+    <div class="docs-section" id="contributing">
+      <h2><span class="section-icon">🤝</span> Contributing</h2>
+      <p>
+        Quick Perplexes is open-source under the MIT license. Contributions,
+        bug reports, and feature ideas are welcome via GitHub.
+      </p>
+      <ul>
+        <li><strong>Bug reports &amp; feature requests:</strong>
+          <a href="https://github.com/ottomando/quick-perplexes/issues" target="_blank" rel="noopener"
+             style="color:var(--accent-light);text-decoration:none">open an issue</a>
+        </li>
+        <li><strong>Running tests:</strong> open <code style="font-family:monospace;font-size:12px">tests/test.html</code> in any browser — results appear immediately.</li>
+        <li><strong>Building packages:</strong> run <code style="font-family:monospace;font-size:12px">node build.js</code> to generate <code style="font-family:monospace;font-size:12px">dist/quick-perplexes-chrome-*.zip</code> and the Firefox equivalent.</li>
+        <li><strong>Reloading after changes:</strong> in Chrome, visit <code style="font-family:monospace;font-size:12px">chrome://extensions</code> and click the refresh icon on the extension card.</li>
+      </ul>
+      <div class="callout" style="margin-top:24px">
+        <span class="callout-icon">⭐</span>
+        <span>
+          If Quick Perplexes saves you time, a
+          <a href="https://github.com/ottomando/quick-perplexes" target="_blank" rel="noopener">star on GitHub</a>
+          is always appreciated.
+        </span>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+  <span>MIT License</span>
+  <a href="https://github.com/ottomando/quick-perplexes" target="_blank" rel="noopener">View source on GitHub &rarr;</a>
+  <a href="index.html">Home</a>
+</footer>
+
+<script src="stars.js"></script>
+<script>
+// Highlight active sidebar link as user scrolls
+(function () {
+  const links    = document.querySelectorAll('.docs-sidebar a[href^="#"]');
+  const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href')));
+
+  function update() {
+    const scrollY = window.scrollY + 90;
+    let current = sections[0];
+    for (const s of sections) {
+      if (s && s.offsetTop <= scrollY) current = s;
+    }
+    links.forEach(l => {
+      const active = l.getAttribute('href') === '#' + (current && current.id);
+      l.classList.toggle('active', active);
+    });
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
+</body>
+</html>
