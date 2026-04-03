@@ -56,3 +56,7 @@ Outputs `dist/quick-perplexes-chrome-{version}.zip` and `dist/quick-perplexes-fi
 | `build.js` | Packages the extension into ZIPs for store submission |
 | `scale-icons.js` | Generates icon sizes from `icons/suggestion.png` |
 | `tests/test.html` | Unit tests for `buildSearchUrl()` |
+
+---
+
+Designed and built with [<img src="https://www.anthropic.com/images/icons/apple-touch-icon.png" width="16" height="16" alt="Claude" style="vertical-align:middle"/> Claude](https://claude.ai).
