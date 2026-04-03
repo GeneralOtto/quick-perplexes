@@ -59,4 +59,4 @@ Outputs `dist/quick-perplexes-chrome-{version}.zip` and `dist/quick-perplexes-fi
 
 ---
 
-Designed and built with [<img src="https://www.anthropic.com/images/icons/apple-touch-icon.png" width="16" height="16" alt="Claude" style="vertical-align:middle"/> Claude](https://claude.ai).
+Designed and built with [<img src="https://cdn.simpleicons.org/claude" width="16" height="16" alt="Claude" style="vertical-align:middle"/> Claude](https://claude.ai).
