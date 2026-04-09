@@ -8,7 +8,7 @@ A Chrome and Firefox extension that summons a Spotlight-like search overlay with
 
 Type a query, hit Enter — Perplexity opens in a new tab.
 
-**[https://ottomando.github.io/quick-perplexes/](https://ottomando.github.io/quick-perplexes/)**
+**[https://GeneralOtto.github.io/quick-perplexes/](https://GeneralOtto.github.io/quick-perplexes/)**
 
 </div>
 
