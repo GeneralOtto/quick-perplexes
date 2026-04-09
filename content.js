@@ -21,6 +21,23 @@
     configurable: true,
   });
 
+  function scrollToCaret(input) {
+    const pos = input.selectionEnd;
+    const text = input.value.substring(0, pos);
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const font = '17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    ctx.font = font;
+    const textWidth = ctx.measureText(text).width;
+    const pad = 14; // matches CSS padding-left/right
+    const visible = input.clientWidth - pad * 2;
+    if (textWidth - input.scrollLeft > visible) {
+      input.scrollLeft = textWidth - visible;
+    } else if (textWidth < input.scrollLeft) {
+      input.scrollLeft = textWidth;
+    }
+  }
+
   function buildSearchUrl(query) {
     return 'https://www.perplexity.ai/search?q=' + encodeURIComponent(query.trim());
   }
@@ -42,11 +59,12 @@
 
     const footer = document.createElement('div');
     footer.id = 'footer';
-    const hint1 = document.createElement('span');
-    hint1.textContent = 'Opens in Perplexity';
-    const hint2 = document.createElement('span');
-    hint2.textContent = 'Esc to close';
-    footer.append(hint1, hint2);
+    const hints = document.createElement('span');
+    hints.className = 'hints';
+    hints.innerHTML = '<kbd>Ctrl</kbd> background · <kbd>Shift</kbd> window · <kbd>Alt</kbd> popup';
+    const primary = document.createElement('span');
+    primary.innerHTML = '<kbd>Enter</kbd> search';
+    footer.append(hints, primary);
 
     const card = document.createElement('div');
     card.id = 'card';
@@ -59,17 +77,6 @@
     shadowRoot.appendChild(style);
     shadowRoot.appendChild(backdrop);
     document.body.appendChild(host);
-
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const query = input.value.trim();
-        if (query) {
-          window.open(buildSearchUrl(query), '_blank');
-          closeOverlay();
-          input.value = '';
-        }
-      }
-    });
 
     backdrop.addEventListener('click', (e) => {
       if (e.target === backdrop) {
@@ -154,9 +161,16 @@
     if (e.key === 'Enter') {
       const query = input.value.trim();
       if (query) {
-        window.open(buildSearchUrl(query), '_blank');
+        if (e.altKey) {
+          const w = 480, h = 700, margin = 20;
+          const left = screen.availWidth - w - margin;
+          const top = screen.availHeight - h - margin;
+          window.open(buildSearchUrl(query), '_blank',
+            `width=${w},height=${h},left=${left},top=${top}`);
+        } else {
+          window.open(buildSearchUrl(query), '_blank');
+        }
         closeOverlay();
-        input.value = '';
       }
       return;
     }
@@ -168,37 +182,42 @@
     if (e.key === 'Backspace') {
       if (ss !== se) input.setRangeText('', ss, se, 'start');
       else if (ss > 0) input.setRangeText('', ss - 1, ss, 'start');
+      scrollToCaret(input);
       return;
     }
     if (e.key === 'Delete') {
       if (ss !== se) input.setRangeText('', ss, se, 'start');
       else if (ss < len) input.setRangeText('', ss, ss + 1, 'start');
+      scrollToCaret(input);
       return;
     }
 
     if (e.key === 'ArrowLeft') {
       if (e.shiftKey) input.setSelectionRange(Math.max(0, ss - 1), se);
       else { const p = ss !== se ? ss : Math.max(0, ss - 1); input.setSelectionRange(p, p); }
+      scrollToCaret(input);
       return;
     }
     if (e.key === 'ArrowRight') {
       if (e.shiftKey) input.setSelectionRange(ss, Math.min(len, se + 1));
       else { const p = ss !== se ? se : Math.min(len, se + 1); input.setSelectionRange(p, p); }
+      scrollToCaret(input);
       return;
     }
-    if (e.key === 'Home') { input.setSelectionRange(0, e.shiftKey ? se : 0); return; }
-    if (e.key === 'End')  { input.setSelectionRange(e.shiftKey ? ss : len, len); return; }
+    if (e.key === 'Home') { input.setSelectionRange(0, e.shiftKey ? se : 0); scrollToCaret(input); return; }
+    if (e.key === 'End')  { input.setSelectionRange(e.shiftKey ? ss : len, len); scrollToCaret(input); return; }
 
     if ((e.ctrlKey || e.metaKey) && e.key === 'a') { input.setSelectionRange(0, len); return; }
     if ((e.ctrlKey || e.metaKey) && e.key === 'v') {
       navigator.clipboard.readText()
-        .then(t => { if (t) input.setRangeText(t, input.selectionStart, input.selectionEnd, 'end'); })
+        .then(t => { if (t) { input.setRangeText(t, input.selectionStart, input.selectionEnd, 'end'); scrollToCaret(input); } })
         .catch(() => {});
       return;
     }
 
     if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
       input.setRangeText(e.key, ss, se, 'end');
+      scrollToCaret(input);
     }
   }, true);
 
